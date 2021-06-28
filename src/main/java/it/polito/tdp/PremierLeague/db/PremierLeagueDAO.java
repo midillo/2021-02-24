@@ -163,5 +163,28 @@ public class PremierLeagueDAO {
 			return null;
 		}
 	}
+	
+	public Integer getTeamHomeOrAway(Match m, Player p){
+		String sql = "SELECT COUNT(*) as c FROM matches m, actions a, teams t "
+				+ "WHERE m.MatchID = a.MatchID AND m.MatchID = ? "
+				+ "AND a.PlayerID = ? AND t.TeamID = m.TeamHomeID ";
+		Connection conn = DBConnect.getConnection();
+		Integer booleano = -1;
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, m.getMatchID());
+			st.setInt(2, p.getPlayerID());
+			ResultSet res = st.executeQuery();
+			while (res.next()) {
+				booleano = res.getInt("c");
+			}
+			conn.close();
+			return booleano;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

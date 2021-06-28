@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
@@ -91,5 +90,30 @@ public class Model {
 		
 		return b;
 	}
+	
+	//PUNTO 2 -> Simulazione
+	
+	private Simulator sim = new Simulator();
+	
+	public void Simulazione(Match m, Integer N) {
+		
+		Best migliore = getBest();
+		sim.init(m, N, migliore, grafo);
+		sim.run();
+	}
+	
+	public Integer getEspulsi() {
+		return sim.getEspulsi();
+	}
+	
+	public Integer getGoalCasa(){
+		return sim.getGoalCasa();
+	}
+	
+	public Integer getGoalFuori() {
+		return sim.getGoalFuori();
+	}
+	
+	
 
 }

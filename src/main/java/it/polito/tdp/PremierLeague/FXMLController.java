@@ -76,6 +76,7 @@ public class FXMLController {
     void doSimula(ActionEvent event) {
     	txtResult.clear();
     	String s = txtN.getText();
+    	Match m = cmbMatch.getValue();
     	Integer N;
     	
     	if(!model.esistenzaGrafo()) {
@@ -85,7 +86,9 @@ public class FXMLController {
     	
     	try {
     		N = Integer.parseInt(s);
-    		
+    		model.Simulazione(m, N);
+    		txtResult.appendText("La partita si è conslusa.\nRisultato: " +model.getGoalCasa()+"-"+model.getGoalFuori()+
+    				"\nCi sono state " +model.getEspulsi()+" espulsioni");
     	}catch(NumberFormatException nfe) {
     		txtResult.appendText("Inserire un valore numerico intero.");
     	}
